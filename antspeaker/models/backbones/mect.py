@@ -779,3 +779,25 @@ class MECT_B2(MECT):
             causal=config.get("causal", False)
         )
 
+@register_backbone.register_module("MECT_B2_Causal")
+class MECT_B2_Causal(MECT):
+    def __init__(self, config={}):
+        in_channels=32
+        feat_dim=80
+        hidden_dim=64
+        conv_group=1
+        super().__init__(
+            in_channels=in_channels,
+            feat_dim=feat_dim,
+            block1=[(3, 32, hidden_dim, conv_group, 1, True, 4)] * 2,
+            block2=[(3, 64, hidden_dim, conv_group, (2,1), True, 2)] + [(3, 64, hidden_dim, conv_group, (1,2), True, 2)]*3,
+            block3=[(3, 128, hidden_dim, conv_group, (2,1), True, 2)] + [(3, 128, hidden_dim, conv_group, (1,2), True, 2)]*4,
+            block4=[(3, 256, hidden_dim, conv_group, (2,1), True, 1)] + [(2, 256, hidden_dim, conv_group, (1,2), True, 1)]*2,
+            moe_type=config.get("moe_type", "token"),
+            num_experts_shard=config.get("num_experts_shard", 2),
+            num_experts_token=config.get("num_experts_token", 4),
+            top_k_shard=config.get("top_k_shard", None),
+            top_k_token=config.get("top_k_token", None),
+            shard_scale=config.get("shard_scale", 1.0),
+            causal=config.get("causal", True)
+        )

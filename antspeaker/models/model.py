@@ -26,6 +26,7 @@ class VPR(nn.Module):
     """
     def __init__(self, config):
         super().__init__()
+        self.cmn = config.get('cmn', True)
         self.feature_extractor = create_backbone(config["backbone"])
         config["pooling"]["input_dim"] = self.feature_extractor.get_out_dim()
         self.encoding_layers = create_pooling(config["pooling"])
@@ -35,8 +36,9 @@ class VPR(nn.Module):
         self.linear = nn.Linear(self.pool_out_dim, self.embed_dim, bias=False)
 
     def forward(self, inputs):
-        with torch.no_grad():
-            inputs = inputs - torch.mean(inputs, -1, keepdim=True)
+        if self.cmn:
+            with torch.no_grad():
+                inputs = inputs - torch.mean(inputs, -1, keepdim=True)
         x = self.feature_extractor(inputs)
         x = self.encoding_layers(x)
         embeddings = self.linear(self.bn(x))
