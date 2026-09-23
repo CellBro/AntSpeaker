@@ -14,13 +14,12 @@
 
 ## 📖 Overview
 
-**MECT** is a novel speaker verification architecture that combines the strengths of **Convolutional Neural Networks (CNNs)** and **Transformer networks** through a **Mixture of Experts (MoE)** approach. The model leverages expert routing to enhance performance and robustness in speaker recognition tasks.
+**MECT** is a speaker verification model that integrates the Mixture-of-Experts (MoE) mechanism into a CNN-Transformer backbone with optimized block structure and stacking scheme. The model explores four MoE variants spanning utterance-level and frame-level granularity with dense and sparse routing strategies, proving that the MoE mechanism is effective over the baseline with only a small increase in parameters.
 
 ### ✨ Key Features
 
-- **CNN + Transformer Fusion** — combines local feature extraction (CNN) with global context modeling (Transformer) in a unified architecture
-- **Mixture of Experts** — dynamic expert routing enables specialized feature processing for diverse speakers and acoustic conditions
-- **Lightweight & Scalable** — four model sizes ranging from 3.78M to 14.43M parameters
+- **Mixture of Experts** — integrates the MoE mechanism into a CNN-Transformer backbone with optimized block structure and stacking scheme, exploring four MoE variants that span utterance-level and frame-level granularity with dense and sparse routing strategies
+- **Lightweight & Scalable** — four model sizes ranging from 3.78M to 9.57M parameters
 - **Strong Performance** — competitive EER on VoxCeleb1 benchmarks
 - **Streaming support** — a streaming speaker verification model is also provided for real-time, low-latency scenarios such as live meetings, voice assistants, and on-device applications
 
@@ -42,9 +41,9 @@ This repository provides **4 model sizes** with **6 checkpoints** in total:
 | MECT-A1 | 3.78M | vc2 | [mect_a1_vc2.pt](https://huggingface.co/AntResearch/AntSpeaker/blob/main/mect_a1_vc2.pt) |
 | MECT-A2 | 4.12M | vc2 | [mect_a2_vc2.pt](https://huggingface.co/AntResearch/AntSpeaker/blob/main/mect_a2_vc2.pt) |
 | MECT-B1 | 8.26M | vc2 | [mect_b1_vc2.pt](https://huggingface.co/AntResearch/AntSpeaker/blob/main/mect_b1_vc2.pt) |
-| MECT-B2 | 14.43M | vc2 | [mect_b2_vc2.pt](https://huggingface.co/AntResearch/AntSpeaker/blob/main/mect_b2_vc2.pt) |
-| MECT-B2 | 14.43M | vc2+vb2 | [mect_b2_vb2.pt](https://huggingface.co/AntResearch/AntSpeaker/blob/main/mect_b2_vb2.pt) |
-| MECT-B2-Causal | 14.43M | vc2 | [mect_b2_vc2_streaming.pt](https://huggingface.co/AntResearch/AntSpeaker/blob/main/mect_b2_vc2_streaming.pt) |
+| MECT-B2 | 9.57M | vc2 | [mect_b2_vc2.pt](https://huggingface.co/AntResearch/AntSpeaker/blob/main/mect_b2_vc2.pt) |
+| MECT-B2 | 9.57M | vc2+vb2 | [mect_b2_vb2.pt](https://huggingface.co/AntResearch/AntSpeaker/blob/main/mect_b2_vb2.pt) |
+| MECT-B2-Causal | 9.57M | vc2 | [mect_b2_vc2_streaming.pt](https://huggingface.co/AntResearch/AntSpeaker/blob/main/mect_b2_vc2_streaming.pt) |
 
 > **MECT-B2-Causal** is a streaming variant of MECT-B2 to support **streaming speaker verification**.
 
